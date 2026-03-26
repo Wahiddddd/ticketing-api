@@ -61,7 +61,7 @@ Proyek ini dikembangkan sebagai solusi backend untuk sistem manajemen tiket even
 
 ## 📝 Dokumentasi API
 
-Akses API menggunakan `Base URL`: `http://localhost:8080`
+Akses API menggunakan `Base URL`: `http://localhost:8085`
 
 ### 1. Autentikasi & Akun
 | Method | Endpoint | Role | Deskripsi |
@@ -106,4 +106,8 @@ Akses API menggunakan `Base URL`: `http://localhost:8080`
 | `GET` | `/api/reports/summary` | ADMIN | Ringkasan pendapatan global dengan filter tanggal. |
 
 ---
-*Untuk pengujian lebih detail, Anda dapat mengimpor koleksi Postman yang sesuai dengan spesifikasi di atas.*
+*Untuk pengujian lebih detail, Anda dapat mengimpor koleksi Postman yang sesuai dengan spesifikasi di atas *
+
+`Dokumentasi Postman:`
+`https://www.postman.com/bootcamp-qa-digital-skola-batch-7/project-bootcamp-dibimbing/request/23091047-7a1dcb6a-abab-467b-ad1f-a3b3f38f8184?sideView=agentMode`
+
