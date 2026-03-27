@@ -1,53 +1,73 @@
-# Ticketing API Service
+## 🚀 Project Overview
 
-## Latar Belakang
-Proyek ini dikembangkan sebagai solusi backend untuk sistem manajemen tiket event yang modern dan skalabel. Fokus utama dari API ini adalah memberikan pengalaman pemesanan tiket yang aman (Atomic Transaction) dan manajemen operasional admin yang efisien. Sistem ini menangani alur dari registrasi user, pencarian event, pembelian tiket dengan validasi stok real-time, hingga sistem refund dan pelaporan pendapatan yang mendalam bagi administrator.
+**Nama Proyek:** Ticketing API Service
 
-## Fitur Utama
-- **User Management**: Registrasi, Login (JWT), dan Role-Based Access (ADMIN, USER).
-- **Event Management**: CRUD Event dengan kategori tiket, kuota, dan harga dinamis.
-- **Booking System**: Pembelian tiket dengan validasi stok (Atomic) dan saldo user.
-- **Admin Workflow**:
-    - **Move Seat**: Pemindahan kursi user (Seat Swapping) yang aman.
-    - **Quick Disable**: Menonaktifkan tiket/kursi yang rusak.
-    - **Admin Refund**: Pengembalian saldo paksa oleh admin dengan pemulihan kuota otomatis.
-- **Reporting**: Laporan pendapatan bersih dan tren penjualan tiket (Bulanan/Global).
-- **Pro Handling**: Global Exception Handling (JSON error response) dan Logging Terstruktur (SLF4J).
+### Deskripsi Proyek
+Ticketing API Service adalah platform backend berbasis Spring Boot yang dirancang untuk menangani seluruh siklus hidup manajemen tiket event. Mulai dari pendaftaran pengguna, pencarian event, hingga transaksi pembelian tiket yang aman dan pelaporan administratif yang komprehensif.
 
-## Tech Stack
-- **Backend**: Java 17, Spring Boot 3
-- **Security**: Spring Security, JWT (JSON Web Token)
-- **Database**: MySQL (Production), H2 (Testing)
-- **Library**: Lombok, MapStruct (optional), Validation
-- **Logging**: SLF4J with Logback
+### Target Pengguna & Pasar
+- **Event Organizers:** Membutuhkan sistem handal untuk mengelola kuota dan memantau pendapatan.
+- **End Users:** Individu yang menginginkan kemudahan dalam mencari dan membeli tiket event secara aman.
+- **System Administrators:** Tim yang bertanggung jawab atas operasional teknis seperti manajemen kursi dan refund darurat.
 
-## Flowchart & Desain Basis Data
+### Masalah & Kebutuhan yang Diatasi (Problem & Solution)
+- **Integritas Data Transaksi:** Mencegah *race conditions* saat pembelian tiket simultan melalui **Atomic Transactions**.
+- **Efisiensi Operasional:** Menyederhanakan proses pembatalan dan refund dengan **Otomatisasi Pemulihan Kuota**.
+- **Transparansi Data:** Mengatasi kesulitan dalam pelaporan keuangan dengan **Sistem Reporting Terpusat**.
 
-### 1. Desain Database
-![Desain Database](./Flow%20Chart/Desain%20Database.drawio.png)
+---
 
-### 2. Autentikasi (Register & Login)
-| Register User | Login System |
-| :--- | :--- |
-| ![Register](./Flow%20Chart/Register%20User.drawio.png) | ![Login](./Flow%20Chart/Login.drawio.png) |
+## 📂 Project Structure
 
-### 3. Flow Pemesanan & Monitoring (User)
-| Booking Event | Monitoring Tiket |
-| :--- | :--- |
-| ![Booking](./Flow%20Chart/Event%20&%20Booking%20User.drawio.png) | ![Monitoring](./Flow%20Chart/Monitoring%20(tiket)%20User.drawio.png) |
+```text
+ticketing-api/
+├── src/
+│   ├── main/
+│   │   ├── java/com/bootcamp/ticketing_api/
+│   │   │   ├── config/             # Konfigurasi Security, JWT, dll.
+│   │   │   ├── controller/         # REST Controllers
+│   │   │   ├── DTO/                # Data Transfer Objects
+│   │   │   ├── entity/             # JPA Entities (Database Models)
+│   │   │   ├── exception/          # Global Exception Handling
+│   │   │   ├── repository/         # Data Access Layer
+│   │   │   └── service/            # Business Logic Layer
+│   │   └── resources/
+│   │       ├── db/migration/       # Database Migrations (SQL)
+│   │       └── application.properties
+│   └── test/                       # Unit & Integration Tests
+├── Dockerfile                      # Build image settings
+├── docker-compose.yml              # Container orchestration
+└── pom.xml                         # Maven dependencies
+```
 
-### 4. Manajemen Admin (Event & Tiket)
-| Add Event | Edit Event | Delete Event |
-| :--- | :--- | :--- |
-| ![Add](./Flow%20Chart/Manajement%20event%20(Add%20Event).drawio.png) | ![Edit](./Flow%20Chart/Manajement%20event%20(Edit%20Event).drawio.png) | ![Delete](./Flow%20Chart/Manajement%20Event%20(Delete%20Event).drawio.png) |
+---
 
-### 5. Manajemen Tiket & Refund
-![Manajemen Tiket](./Flow%20Chart/Manajement%20Ticket.drawio.png)
+## 🐳 Running with Docker
 
-### 6. Laporan & Analisis
-![Laporan](./Flow%20Chart/Laporan%20&%20analisis%20admin%20drawio.png)
+Proyek ini telah dikonfigurasi untuk dijalankan dengan Docker Compose, yang akan mengatur aplikasi dan database MySQL secara otomatis.
 
-## Cara Menjalankan
+### Prasyarat
+- Docker Desktop terinstal.
+
+### Langkah-langkah
+1.  **Build & Run:**
+    Jalankan perintah berikut di root direktori proyek:
+    ```bash
+    docker-compose up --build
+    ```
+2.  **Akses Aplikasi:**
+    - API: `http://localhost:8085`
+    - Database (Host): `localhost:3307` (Internal: 3306)
+
+### Variabel Lingkungan (Environment Variables)
+Konfigurasi utama di `docker-compose.yml`:
+- `MYSQL_DATABASE`: `db_ticketing`
+- `MYSQL_ROOT_PASSWORD`: `dibimbing123`
+- `JWT_SECRET`: (Sudah terkonfigurasi secara default)
+
+---
+
+## Cara Menjalankan (Tanpa Docker)
 1. Clone repository ini.
 2. Pastikan MySQL berjalan (Konfigurasi ada di `src/main/resources/application.properties`).
 3. Jalankan build:
