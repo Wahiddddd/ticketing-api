@@ -180,6 +180,10 @@ Akses API menggunakan `Base URL`: `http://localhost:8085`
 ---
 *Untuk pengujian lebih detail, Anda dapat mengimpor koleksi Postman yang sesuai dengan spesifikasi di atas *
 
-`Dokumentasi Postman:`
+---
+Dokumentasi Postman:
 `https://www.postman.com/bootcamp-qa-digital-skola-batch-7/project-bootcamp-dibimbing/request/23091047-7a1dcb6a-abab-467b-ad1f-a3b3f38f8184?sideView=agentMode`
+
+Link presentasi:
+`https://www.canva.com/design/DAHFEPuWYec/Qm80-60wKyHLghFx2AutAA/edit`
 
